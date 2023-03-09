@@ -20,7 +20,7 @@ const QuizRules = () => {
   const [existingNames, setExistingNames] = useState([]);
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/getUsers")
+    Axios.get("https://mern-quiz-api-ozt8.onrender.com/getUsers")
       .then((response) => {
         setExistingNames(response.data.map((user) => user.name));
       })

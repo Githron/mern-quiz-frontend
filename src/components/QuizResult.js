@@ -17,7 +17,7 @@ const QuizResult = () => {
 
   useEffect(() => {
     if (name && !isNameSet) {
-      Axios.get("http://localhost:3001/getUsers")
+      Axios.get("https://mern-quiz-api-ozt8.onrender.com/getUsers")
         .then((response) => {
           const users = response.data;
           const nameExists = users.some((user) => user.name === name);
@@ -34,7 +34,7 @@ const QuizResult = () => {
   useEffect(() => {
     if (name && score && isNameSet) {
       if (isNameExists) {
-        Axios.get("http://localhost:3001/getUsers")
+        Axios.get("https://mern-quiz-api-ozt8.onrender.com/getUsers")
           .then((response) => {
             setListOfUsers(response.data);
           })
@@ -42,12 +42,12 @@ const QuizResult = () => {
             console.log(error);
           });
       } else {
-        Axios.post("http://localhost:3001/createUser", {
+        Axios.post("https://mern-quiz-api-ozt8.onrender.com/createUser", {
           name,
           score,
         })
           .then(() => {
-            Axios.get("http://localhost:3001/getUsers")
+            Axios.get("https://mern-quiz-api-ozt8.onrender.com/getUsers")
               .then((response) => {
                 setListOfUsers(response.data);
               })
