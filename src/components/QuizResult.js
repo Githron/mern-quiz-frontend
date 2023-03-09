@@ -102,7 +102,7 @@ const QuizResult = () => {
                 </h1>
 
                 <div id="option-container">
-                    {[...listOfUsers].reverse().map((user, index) => {
+                    {[...listOfUsers].sort((a, b) => b.score - a.score).map((user, index) => {
                         return (
                             <div key={index}>
                                 <p
