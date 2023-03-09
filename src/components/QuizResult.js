@@ -1,84 +1,120 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Axios from "axios";
+import trophyImg from "./trophy.png";
 
 const QuizResult = () => {
-    const [listOfUsers, setListOfUsers] = useState([]);
-    const [name, setName] = useState("");
-    const [score, setScore] = useState("");
-    const [isNameExists, setIsNameExists] = useState(false);
-    const [isNameSet, setIsNameSet] = useState(false);
-    const location = useLocation();
+  const [listOfUsers, setListOfUsers] = useState([]);
+  const [name, setName] = useState("");
+  const [score, setScore] = useState("");
+  const [totalquiz, setTotalquiz] = useState("");
 
-    useEffect(() => {
-        setName(location.state.name);
-        setScore(location.state.totalCorrectAnswers);
-    }, [location]);
+  const [isNameExists, setIsNameExists] = useState(false);
+  const [isNameSet, setIsNameSet] = useState(false);
+  const location = useLocation();
 
-    useEffect(() => {
-        if (name && !isNameSet) {
+  useEffect(() => {
+    setName(location.state.name);
+    setScore(location.state.totalCorrectAnswers);
+    setTotalquiz(location.state.totalQuestions);
+  }, [location]);
+
+  useEffect(() => {
+    if (name && !isNameSet) {
+      Axios.get("http://localhost:3001/getUsers")
+        .then((response) => {
+          const users = response.data;
+          const nameExists = users.some((user) => user.name === name);
+          setIsNameExists(nameExists);
+          setIsNameSet(true);
+          setListOfUsers(users);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [name, isNameSet]);
+
+  useEffect(() => {
+    if (name && score && totalquiz && isNameSet) {
+      if (isNameExists) {
+        Axios.get("http://localhost:3001/getUsers")
+          .then((response) => {
+            setListOfUsers(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        Axios.post("http://localhost:3001/createUser", {
+          name,
+          score,
+          totalquiz,
+        })
+          .then(() => {
             Axios.get("http://localhost:3001/getUsers")
-                .then((response) => {
-                    const users = response.data;
-                    const nameExists = users.some((user) => user.name === name);
-                    setIsNameExists(nameExists);
-                    setIsNameSet(true);
-                    setListOfUsers(users);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        }
-    }, [name, isNameSet]);
+              .then((response) => {
+                setListOfUsers(response.data);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    }
+  }, [name, score, totalquiz, isNameExists, isNameSet]);
 
-    useEffect(() => {
-        if (name && score && isNameSet) {
-            if (isNameExists) {
-                Axios.get("http://localhost:3001/getUsers")
-                    .then((response) => {
-                        setListOfUsers(response.data);
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
-            } else {
-                Axios.post("http://localhost:3001/createUser", {
-                    name,
-                    score,
-                })
-                    .then(() => {
-                        Axios.get("http://localhost:3001/getUsers")
-                            .then((response) => {
-                                setListOfUsers(response.data);
-                            })
-                            .catch((error) => {
-                                console.log(error);
-                            });
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
-            }
-        }
-    }, [name, score, isNameExists, isNameSet]);
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        return () => {
-            setIsNameSet(false);
-        };
-    }, []);
+    const handleClick = () => {
+        console.log("Div clicked!");
+        navigate("/");
+    };
+
+ 
+
 
     return (
-        <div id="container">
-            <div style={{padding: "0 2rem"}}>
-                <h1 className="header">Leader Boards</h1>
+        <div style={{ overflow: "scroll" }} id="container">
+            <div className="header">RESULT DETAIL</div>
+            <div className="content"></div>
+
+            <img
+                style={{ display:"block", margin: "auto", marginTop: "2rem" }}
+                id="trophyImg"
+                src={trophyImg}
+                alt=""
+            ></img>
+            <h3 id="score" className="result-score">
+                You Got <b>{location.state.totalCorrectAnswers}</b> Out Of <b>{location.state.totalQuestions}</b>
+            </h3>
+            <div id="result-footer">
+                <button onClick={handleClick} id="start-again">Start Again</button>
+                {/* <button id="view-result">View Result</button> */}
+            </div>
+
+            <div style={{ padding: "0 2rem" }}>
+                <h1 style={{ margin: "3rem 0" }} className="header">
+                    LEADER BOARDS
+                </h1>
 
                 <div id="option-container">
                     {[...listOfUsers].reverse().map((user, index) => {
                         return (
                             <div key={index}>
-                                <p style={{fontSize:"16px"}} className="option"> {user.name} <h4 id="scoreR">Score: {user.score} out of 20</h4></p>
-                             
+                                <p
+                                    style={{ fontSize: "16px" }}
+                                    className="option"
+                                >
+                                    {" "}
+                                    {user.name}{" "}
+                                    <h4 id="scoreR">
+                                        Score: {user.score} out of {user.totalquiz}
+                                    </h4>
+                                </p>
                             </div>
                         );
                     })}
