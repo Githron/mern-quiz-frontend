@@ -36,15 +36,22 @@ const QuizRules = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         if (!existingNames.includes(name)) {
-            // redirect to quiz if the name is not in the database
-            window.location.href = `/questions?name=${name}`;
-            console.log(`User input: ${name}`);
+            if (name !== "") {
+                // redirect to quiz if the name is not in the database and input is not empty
+                window.location.href = `/questions?name=${name}`;
+                console.log(`User input: ${name}`);
+            } else {
+                alert("Please Enter Your Name");
+                console.log("Name field is empty.");
+            }
         } else {
-            console.log(`${name} already exists in the database.`);
+            alert(`${name} already exists.`);
+            console.log(`${name} already exists`);
             // clear input field if the name is in the database
             setName("");
         }
     };
+    
 
     return (
         <div id="container">
@@ -61,7 +68,7 @@ const QuizRules = () => {
                         style={inputStyle}
                         className="inpX"
                         type="text"
-                        placeholder="Enter your name"
+                        placeholder="Enter your Username"
                         value={name}
                         onChange={handleNameChange}
                     />
