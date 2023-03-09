@@ -77,7 +77,7 @@ const QuizResult = () => {
                     {[...listOfUsers].reverse().map((user, index) => {
                         return (
                             <div key={index}>
-                                <p style={{fontSize:"16px"}} className="option"> {user.name} <h4 id="scoreR">Score: {user.score} out of 2</h4></p>
+                                <p style={{fontSize:"16px"}} className="option"> {user.name} <h4 id="scoreR">Score: {user.score} out of 20</h4></p>
                              
                             </div>
                         );
