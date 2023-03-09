@@ -233,3 +233,25 @@ button:hover
     background: #ffd951;
     color: #0f172a;
 }
+
+.usersDisplay{
+    padding: 3rem;
+}
+
+.ph1{
+    color: #ffd951;
+    margin: 1rem;
+}
+
+.pResult{
+    color: #ffd951;
+}
+
+#scoreR{
+    background-color: #1e293b;
+    position: absolute;
+    right: 1.2rem;
+    padding: .5rem;
+    color: rgb(190, 190, 190);
+    border-radius: 5px;
+}
