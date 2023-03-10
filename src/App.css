@@ -255,3 +255,16 @@ button:hover
     color: rgb(190, 190, 190);
     border-radius: 5px;
 }
+
+.headerNresult
+{
+    background-color: #1e293b;
+    height: 100px;
+    display: grid;
+    place-items: center;
+    font-size: 25px;
+    color: #ffd951;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px #1b2135ff;
+    border-top: 1px solid #ffffff20;
+}
