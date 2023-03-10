@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import { Link } from "react-router-dom";
 import Axios from "axios";
 
 const QuizRules = () => {
@@ -18,14 +17,19 @@ const QuizRules = () => {
 
     const [name, setName] = useState("");
     const [existingNames, setExistingNames] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         Axios.get("https://mern-quiz-api-ozt8.onrender.com/getUsers")
             .then((response) => {
                 setExistingNames(response.data.map((user) => user.name));
+                setIsLoading(false);
             })
             .catch((error) => {
-                console.log(error);
+                setError(error);
+                setIsLoading(false);
             });
     }, []);
 
@@ -37,6 +41,7 @@ const QuizRules = () => {
         event.preventDefault();
         if (!existingNames.includes(name)) {
             if (name !== "") {
+                setIsSubmitting(true);
                 // redirect to quiz if the name is not in the database and input is not empty
                 window.location.href = `/questions?name=${name}`;
                 console.log(`User input: ${name}`);
@@ -51,7 +56,14 @@ const QuizRules = () => {
             setName("");
         }
     };
-    
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
 
     return (
         <div id="container">
@@ -73,8 +85,12 @@ const QuizRules = () => {
                         onChange={handleNameChange}
                     />
                     <div id="start-quiz-wrapper">
-                        <button id="start-quiz" type="submit">
-                            Start Quiz
+                        <button
+                            id="start-quiz"
+                            type="submit"
+                            disabled={isSubmitting}
+                        >
+                            {isSubmitting ? "Submitting..." : "Start Quiz"}
                         </button>
                     </div>
                 </form>
