@@ -19,7 +19,7 @@ body
 {
     border-radius: 10px;
     width: 400px;
-    max-height: 630px;
+    max-height: 100vh;
     border: 1px solid #ffffff20;
     overflow: hidden;
     background-color: #1e293b;
@@ -215,7 +215,9 @@ button:hover
 {
     display: flex;
     justify-content: center;
-    margin: 30px 0;
+    margin-top: 30px;
+    border-bottom: 1px solid #ffffff20;
+    padding-bottom: 3rem;
 }
 #result-footer button
 {
@@ -266,5 +268,5 @@ button:hover
     color: #ffd951;
     font-weight: bold;
     text-shadow: 1px 1px 2px #1b2135ff;
-    border-top: 1px solid #ffffff20;
+    /* border-top: 1px solid #ffffff20; */
 }
