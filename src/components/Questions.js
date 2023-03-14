@@ -72,7 +72,7 @@ const Questions = () => {
   };
 
   const handleNextQuestionClick = () => {
-    setCount(10);
+    setCount(20);
     if (currentQuestion === quiz_questions.length - 1) {
       // Last question, redirect to quiz-result page
       navigate("/quiz-result", {
@@ -99,7 +99,7 @@ const Questions = () => {
     nextDiv.style.display = "none";
   };
 
-  const [count, setCount] = useState(10);
+  const [count, setCount] = useState(20);
   const [countdownId, setCountdownId] = useState(null);
 
  useEffect(() => {
