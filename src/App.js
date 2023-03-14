@@ -1,4 +1,5 @@
 import "./App.css";
+import "./loading.css";
 import { Routes, Route } from "react-router-dom";
 import QuizRules from "./components/QuizRules";
 import Questions from "./components/Questions";
