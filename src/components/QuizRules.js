@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const QuizRules = () => {
 
@@ -39,13 +40,15 @@ const QuizRules = () => {
         setName(event.target.value);
     };
 
+    const navigate = useNavigate();
+
     const handleSubmit = (event) => {
         event.preventDefault();
         if (!existingNames.includes(name)) {
             if (name !== "") {
                 setIsSubmitting(true);
-                // redirect to quiz if the name is not in the database and input is not empty
-                window.location.href = `/questions?name=${name}`;
+                // navigate to quiz if the name is not in the database and input is not empty
+                navigate(`/questions?name=${name}`);
                 console.log(`User input: ${name}`);
             } else {
                 alert("Please Enter Your Name");
