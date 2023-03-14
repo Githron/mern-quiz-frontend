@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 
 const QuizRules = () => {
+
+
     const quizRules = [
         "You Have Only 20 Seconds For Each Question.",
         "Once You Select Any Answer.It Can't Be Undone",

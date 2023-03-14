@@ -2,7 +2,22 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import quiz_questions from "./quizQuestions";
 
+import { playSound } from "./sound";
+
 const Questions = () => {
+
+
+
+
+  useEffect(() => {
+    playSound();
+
+    // Clean up function to stop the sound when the component unmounts
+    // return () => {
+    //   pauseSound();
+    // };
+  }, []);
+
   const location = useLocation();
   const name = new URLSearchParams(location.search).get("name");
 
@@ -34,11 +49,11 @@ const Questions = () => {
         setTotalCorrectAnswers(totalCorrectAnswers + 1);
         console.log(`Selected answer is correct!`);
         // Style the selected answer as green if it is correct
-        event.target.style.backgroundColor = "green";
+        event.target.style.backgroundColor = "#13C471";
       } else {
         console.log(`Selected answer is incorrect!`);
         // Style the selected answer as red if it is incorrect
-        event.target.style.backgroundColor = "red";
+        event.target.style.backgroundColor = "#F84A5C";
 
         // Style the correct answer as green
         const options = event.target.parentElement.children;
@@ -46,7 +61,7 @@ const Questions = () => {
           const optionElem = options[i];
           const optionNumber = i + 1;
           if (optionNumber === correctAnswer) {
-            optionElem.style.backgroundColor = "green";
+            optionElem.style.backgroundColor = "#13C471";
             break;
           }
         }
@@ -57,7 +72,7 @@ const Questions = () => {
   };
 
   const handleNextQuestionClick = () => {
-    setCount(20);
+    setCount(10);
     if (currentQuestion === quiz_questions.length - 1) {
       // Last question, redirect to quiz-result page
       navigate("/quiz-result", {
@@ -84,7 +99,7 @@ const Questions = () => {
     nextDiv.style.display = "none";
   };
 
-  const [count, setCount] = useState(20);
+  const [count, setCount] = useState(10);
   const [countdownId, setCountdownId] = useState(null);
 
  useEffect(() => {

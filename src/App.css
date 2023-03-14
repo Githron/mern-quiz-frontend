@@ -32,7 +32,7 @@ body
     display: grid;
     place-items: center;
     font-size: 25px;
-    color: #ffd951;
+    color: #13C471;
     font-weight: bold;
     text-shadow: 1px 1px 2px #1b2135ff;
     border-bottom: 1px solid #ffffff20;
@@ -48,13 +48,14 @@ li
 }
 #start-quiz-wrapper
 {
+    margin-top: .8rem;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 button
 {
-    background-color: #ffd951;
+    background-color: #13C471;
     border: none;
     outline: none;
     border-radius: 10px;
@@ -67,7 +68,7 @@ button
 }
 button:hover
 {
-    background-color: #ffd951;
+    background-color: #13C471;
 }
 
 .content
@@ -120,7 +121,7 @@ button:hover
     border-radius: 5px;
     font-size: 11px;
     font-weight: bold;
-    background-color: #ffd951;
+    background-color: #13C471;
     color: #1e293b;
     padding: 5px;
 }
@@ -128,7 +129,8 @@ button:hover
 
 .option:hover
 {
-    background-color: #ffd951;
+    background-color: #d8d8d8;
+    border: 2px solid #5a5a5a;
     color: #1e293b;
 }
 
@@ -176,7 +178,7 @@ button:hover
     font-size: 13px;
     font-weight: 500;
     margin: 10px 0 20px 0;
-    color: #ffd951;
+    color: #13C471;
     font-weight: bold;
 }
 .time-over
@@ -204,7 +206,7 @@ button:hover
 }
 #score b
 {
-    color: #ffd951;
+    color: #13C471;
     font-size: 25px;
 }
 .result-score
@@ -227,12 +229,12 @@ button:hover
 #detailed-result
 {
     background: transparent;
-    color: #ffd951;
-    border: 1px solid #ffd951;
+    color: #13C471;
+    border: 1px solid #13C471;
 }
 #detailed-result:hover
 {
-    background: #ffd951;
+    background: #13C471;
     color: #0f172a;
 }
 
@@ -241,15 +243,17 @@ button:hover
 }
 
 .ph1{
-    color: #ffd951;
+    color: #13C471;
     margin: 1rem;
 }
 
 .pResult{
-    color: #ffd951;
+    color: #13C471;
 }
 
 #scoreR{
+    width: 169px;
+    text-align: center;
     background-color: #1e293b;
     position: absolute;
     right: 1.2rem;
@@ -265,8 +269,54 @@ button:hover
     display: grid;
     place-items: center;
     font-size: 25px;
-    color: #ffd951;
+    color: #13C471;
     font-weight: bold;
     text-shadow: 1px 1px 2px #1b2135ff;
     /* border-top: 1px solid #ffffff20; */
+}
+
+.optionR:hover{
+    min-height: 40px;
+    border-radius: 10px;
+    background-color: #0f172a;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    font-size: 13px;
+    cursor: pointer;
+    color: #73ff7a;
+    margin: 8px 0;
+    font-weight: 500;
+    position: relative;
+
+    transform: scale(1.2);
+
+    /* text-align: center;
+    justify-content: center; */
+}
+
+.optionR{
+    min-height: 40px;
+    border-radius: 10px;
+    background-color: #0f172a;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    font-size: 13px;
+    cursor: pointer;
+    color: #ccdae7;
+    margin: 8px 0;
+    font-weight: 500;
+    position: relative;
+
+    /* text-align: center;
+    justify-content: center; */
+}
+
+.inpX{
+    background-color: #1e293b;
+    padding: 1rem;
+    border: 2px solid #ffffff20;
+    border-radius: 5px;
+    color: white;
 }
