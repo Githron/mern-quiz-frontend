@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import trophyImg from "./trophy.png";
-import { pauseSound } from "./sound";
+// import { pauseSound } from "./sound";
 
 const QuizResult = () => {
   const [listOfUsers, setListOfUsers] = useState([]);
@@ -71,7 +71,7 @@ const QuizResult = () => {
   const navigate = useNavigate();
 
     const handleClick = () => {
-        pauseSound();
+        // pauseSound();
         console.log("Div clicked!");
         navigate("/");
     };
