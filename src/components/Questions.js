@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import quiz_questions from "./quizQuestions";
 
-import { Howl } from 'howler';
+import { Howl } from "howler";
 
 import { playSound } from "./sound";
 
@@ -33,16 +33,16 @@ const Questions = () => {
 
     //
     const soundCorrect = new Howl({
-      src: [correctMp3],
-      volume: 0.5,
-      autoplay: false,
-      loop: false,
+        src: [correctMp3],
+        volume: 0.5,
+        autoplay: false,
+        loop: false,
     });
 
     const soundWrong = new Howl({
-      src: [wrongMp3],
-      autoplay: false,
-      loop: false,
+        src: [wrongMp3],
+        autoplay: false,
+        loop: false,
     });
 
     const handleAnswerOptionClick = (option, optionNumber, event) => {
@@ -62,13 +62,13 @@ const Questions = () => {
             );
 
             if (optionNumber + 1 === correctAnswer) {
-              soundCorrect.play()
+                soundCorrect.play();
                 setTotalCorrectAnswers(totalCorrectAnswers + 1);
                 console.log(`Selected answer is correct!`);
                 // Style the selected answer as green if it is correct
                 event.target.style.backgroundColor = "#13C471";
             } else {
-                soundWrong.play()
+                soundWrong.play();
                 console.log(`Selected answer is incorrect!`);
                 // Style the selected answer as red if it is incorrect
                 event.target.style.backgroundColor = "#F84A5C";
@@ -149,6 +149,9 @@ const Questions = () => {
         return () => clearInterval(countdown);
     }, [count, currentQuestion]);
 
+    // Display "Time's Up" instead of remaining time when count is 0
+    const timerText = count === 0 ? "Time's Up!" : `Time Left: ${count} Sec`;
+
     return (
         <div id="container">
             <div className="header">QUIZ APP</div>
@@ -194,7 +197,7 @@ const Questions = () => {
 
                 <div className="footer" id="footer">
                     <p id="timer" className={timerShakeClass}>
-                        Time Left: {count} Sec
+                        {timerText}
                     </p>
                     <button
                         style={{ display: "none" }}
