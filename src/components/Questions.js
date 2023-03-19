@@ -90,6 +90,8 @@ const Questions = () => {
     };
 
     const handleNextQuestionClick = () => {
+        const timerShake = document.getElementById("timer");
+        timerShake.style.color = "";
         setCount(20);
         if (currentQuestion === quiz_questions.length - 1) {
             // Last question, redirect to quiz-result page
@@ -137,9 +139,13 @@ const Questions = () => {
             }
         }, 1000);
 
-        if (count <= 10) {
+        if (count <= 10 && count > 0) {
             setTimerShakeClass("timerShakeClass");
-        } else {
+
+        } else if (count <= 0) {
+            setDisableDiv(true); // disable options click
+            const timerShake = document.getElementById("timer");
+            timerShake.style.color = "rgb(250, 81, 81)";
             setTimerShakeClass("");
         }
 
