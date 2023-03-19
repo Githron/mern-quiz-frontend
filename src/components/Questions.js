@@ -212,6 +212,7 @@ const Questions = () => {
                     >
                         Next
                     </button>
+                    
                 </div>
             </div>
         </div>
