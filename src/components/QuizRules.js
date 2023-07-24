@@ -105,7 +105,7 @@ const QuizRules = () => {
                         color: "#ccdae7",
                     }}
                 >
-                    Loading...
+                    Loading...Please wait.
                 </div>
             </div>
         );
